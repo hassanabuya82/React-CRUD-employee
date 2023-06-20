@@ -2,10 +2,22 @@
   "employee": [
     {
       "id": 1,
-      "name": "Habuya",
+      "name": "Abuya",
       "email": "abuya@gmail.com",
       "phone": "0736704000"
+    },
+    {
+      "name": "Hassan",
+      "email": "hassan@abuya.com",
+      "phone": "76541",
+      "active": false,
+      "id": 2
+    },
+    {
+      "id": 3,
+      "name": "HAbuya",
+      "email": "haabu@gm.com",
+      "phone": "0759139986"
     }
   ]
-  
 }

@@ -1,8 +1,33 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function EmpListing() {
   const [empdata, empdatachange] = useState(null);
+
+  const navigate = useNavigate();
+
+  const loadDetail = (id) => {
+    navigate("/employee/details/" + id);
+  };
+  const loadEdit = (id) => {
+    navigate("/employee/edit/" + id);
+  };
+
+  const loadRemove = (id) => {
+    if (window.confirm(`Do you want to delete? ${id}`)) {
+      fetch("http://localhost:8000/employee/" + id, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          alert("Deleted successfully");
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  };
+
   useEffect(() => {
     fetch("http://localhost:8000/employee")
       .then((res) => {
@@ -47,13 +72,31 @@ function EmpListing() {
                     <td>{item.email}</td>
                     <td>{item.phone}</td>
                     <td>
-                      <a className="btn btn-success m-2" href="">
+                      <a
+                        onClick={() => {
+                          loadEdit(item.id);
+                        }}
+                        className="btn btn-success m-2"
+                        href=""
+                      >
                         Edit
                       </a>
-                      <a className="btn btn-danger m-2" href="">
+                      <a
+                        onClick={() => {
+                          loadRemove(item.id);
+                        }}
+                        className="btn btn-danger m-2"
+                        href=""
+                      >
                         Remove
                       </a>
-                      <a className="btn btn-warning m-2" href="">
+                      <a
+                        onClick={() => {
+                          loadDetail(item.id);
+                        }}
+                        className="btn btn-warning m-2"
+                        href=""
+                      >
                         Details
                       </a>
                     </td>
